@@ -5,6 +5,7 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="3306"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <property name="databaseName" value="project6"/>
         <property name="User" value="elsasantos"/>
         <property name="Password" value="7337"/>
@@ -13,6 +14,8 @@
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="Projecto6" object-type="user" pool-name="mysql_project6_rootPool"/>
 =======
+=======
+>>>>>>> 9b6156d3f20cbdf7be2d1f989bd2c6b6fe4f54a3
         <property name="databaseName" value="getplay"/>
         <property name="User" value="susana"/>
         <property name="Password" value="susana"/>
@@ -20,5 +23,8 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="getplay" object-type="user" pool-name="mysql_getplay_marciaPool"/>
+<<<<<<< HEAD
+>>>>>>> 9b6156d3f20cbdf7be2d1f989bd2c6b6fe4f54a3
+=======
 >>>>>>> 9b6156d3f20cbdf7be2d1f989bd2c6b6fe4f54a3
 </resources>
