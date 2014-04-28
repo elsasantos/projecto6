@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -71,6 +72,11 @@ public class Music implements Serializable, Comparable<Music> {
 
     @ManyToMany(mappedBy = "musics")
     private List<Playlist> playlists;
+
+    @OneToMany(mappedBy = "music")
+    private List<Lyric> lyrics;
+
+    private boolean lyricExist;
 
     public Music() {
     }
@@ -145,6 +151,22 @@ public class Music implements Serializable, Comparable<Music> {
 
     public void setPlaylists(List<Playlist> playlists) {
         this.playlists = playlists;
+    }
+
+    public List<Lyric> getLyrics() {
+        return lyrics;
+    }
+
+    public void setLyrics(List<Lyric> lyrics) {
+        this.lyrics = lyrics;
+    }
+
+    public boolean isLyricExist() {
+        return lyricExist;
+    }
+
+    public void setLyricExist(boolean lyricExist) {
+        this.lyricExist = lyricExist;
     }
 
     @Override

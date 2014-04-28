@@ -35,7 +35,6 @@ public class LoggedUserMb implements Serializable {
     private DeleteUser delUser;
     private String errorMessage;
     private UIForm confirmDeleteUser;
-  
 
     /**
      * Creates a new instance of LoggedUser
@@ -87,7 +86,7 @@ public class LoggedUserMb implements Serializable {
         return "index.xhtml";
     }
 
-        /**
+    /**
      * Invokes DelUser EJB method to remove logged user
      *
      * @return
@@ -95,11 +94,11 @@ public class LoggedUserMb implements Serializable {
     public void aConfirmDeleteUser() {
         confirmDeleteUser.setRendered(true);
     }
-    
-    public void confirmNoDeleteUser(){
+
+    public void confirmNoDeleteUser() {
         confirmDeleteUser.setRendered(false);
     }
-    
+
     //Getter and Setter
     /**
      * Get User
@@ -198,7 +197,5 @@ public class LoggedUserMb implements Serializable {
     public void setConfirmDeleteUser(UIForm confirmDeleteUser) {
         this.confirmDeleteUser = confirmDeleteUser;
     }
-    
-    
 
 }

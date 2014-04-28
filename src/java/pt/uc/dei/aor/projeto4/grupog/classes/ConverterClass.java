@@ -17,7 +17,6 @@ import pt.uc.dei.aor.projeto4.grupog.entities.Playlist;
  * @author Elsa Santos
  * @author Pedro Pamplona
  */
-
 public class ConverterClass implements Converter {
 
     @Inject

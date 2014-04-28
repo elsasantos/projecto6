@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import pt.uc.dei.aor.projeto4.grupog.entities.AppUser;
 import pt.uc.dei.aor.projeto4.grupog.entities.Music;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-03-28T17:55:39")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-04-28T13:06:31")
 @StaticMetamodel(Playlist.class)
 public class Playlist_ { 
 

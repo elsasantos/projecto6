@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 
-import pt.uc.dei.aor.projeto4.grupog.exceptions.DuplicateEmailException;
-import pt.uc.dei.aor.projeto4.grupog.ejbs.AppUserFacade;
-import pt.uc.dei.aor.projeto4.grupog.entities.AppUser;
 import javax.ejb.embeddable.EJBContainer;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,12 +12,14 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pt.uc.dei.aor.projeto4.grupog.ejbs.AppUserFacade;
+import pt.uc.dei.aor.projeto4.grupog.entities.AppUser;
+import pt.uc.dei.aor.projeto4.grupog.exceptions.DuplicateEmailException;
 
 /**
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 public class AppUserFacadeTest {
 
     static EJBContainer container;
@@ -50,6 +49,7 @@ public class AppUserFacadeTest {
 
     /**
      * Test of addUser method, of class AppUserFacade.
+     *
      * @throws Exceptions.DuplicateEmailException
      */
     @Test
@@ -69,6 +69,7 @@ public class AppUserFacadeTest {
 
     /**
      * Test of existUser2 method, of class AppUserFacade.
+     *
      * @throws Exceptions.DuplicateEmailException
      */
     @Test
@@ -88,6 +89,7 @@ public class AppUserFacadeTest {
 
     /**
      * Test of validaPassword method, of class AppUserFacade.
+     *
      * @throws java.lang.Exception
      */
     @Test

@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.aor.projeto4.grupog.exceptions;
 
 /**
  * @author Elsa Santos
  * @author Pedro Pamplona
  */
+public class MusicsAlreadyExistInPlaylistException extends Exception {
 
-public class MusicsAlreadyExistInPlaylistException extends Exception{
-    public MusicsAlreadyExistInPlaylistException(){
+    public MusicsAlreadyExistInPlaylistException() {
         super("This music already exist in the select playlist.");
     }
 }

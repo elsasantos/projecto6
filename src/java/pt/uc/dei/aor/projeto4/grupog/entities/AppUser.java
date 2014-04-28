@@ -58,6 +58,9 @@ public class AppUser implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Playlist> playlists;
 
+    @OneToMany(mappedBy = "appuser")
+    private List<Lyric> lyrics;
+
     public AppUser() {
     }
 
@@ -113,6 +116,14 @@ public class AppUser implements Serializable {
 
     public void setMusics(List<Music> musics) {
         this.musics = musics;
+    }
+
+    public List<Lyric> getLyrics() {
+        return lyrics;
+    }
+
+    public void setLyrics(List<Lyric> lyrics) {
+        this.lyrics = lyrics;
     }
 
     @Override

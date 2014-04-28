@@ -18,7 +18,6 @@ import pt.uc.dei.aor.projeto4.grupog.entities.Music;
  * @author Elsa Santos
  * @author Pedro Pamplona
  */
-
 @Named("editMusicController")
 @ViewScoped
 public class EditMusicController {

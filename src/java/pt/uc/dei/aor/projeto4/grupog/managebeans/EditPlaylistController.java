@@ -56,7 +56,7 @@ public class EditPlaylistController {
      * @return
      */
     public String removeMusicPlaylist() {
-        
+
         playlistEjb.removeMusicFromPlaylist(playlistSelected, musicSelected);
         return null;
     }

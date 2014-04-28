@@ -77,21 +77,19 @@ public class RequestPlaylistMb {
         }
         return null;
     }
-    
-//    public List<Music> topTen(){
-//        
-//    }
 
-    public void createPlaylistFromServleTopTen() throws MusicsAlreadyExistInPlaylistException{
+//    public List<Music> topTen(){
+//
+//    }
+    public void createPlaylistFromServleTopTen() throws MusicsAlreadyExistInPlaylistException {
         addPlaylist();
         List<Music> musicstop = musicFacade.showTopTenPopularMusics();
-        for (Music m: musicstop){
+        for (Music m : musicstop) {
             playlist_ejb.addMusicToPlaylist(playlist, m);
-        } 
+        }
     }
-    
-    //Getter and Setter
 
+    //Getter and Setter
     /**
      * Get Playlist EJB
      *
