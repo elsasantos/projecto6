@@ -1,0 +1,8 @@
+/build/
+/dist/
+/nbproject/
+/setup/
+/src/conf/MANIFEST.MF
+/src/conf/persistence.xml
+/setup/glassfish-resources.xml
+/build.xml
