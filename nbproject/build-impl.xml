@@ -18,6 +18,7 @@
 
         -->
 <project xmlns:webproject1="http://www.netbeans.org/ns/web-project/1" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:webproject3="http://www.netbeans.org/ns/web-project/3" basedir=".." default="default" name="GetPlayWeb-impl">
+    <import file="jaxws-build.xml"/>
     <import file="ant-deploy.xml"/>
     <fail message="Please build using Ant 1.7.1 or higher.">
         <condition>
@@ -855,7 +856,29 @@ exists or setup the property manually. For example like this:
     <target depends="init" if="no.dist.ear.dir" name="deps-module-jar" unless="no.deps"/>
     <target depends="init" if="dist.ear.dir" name="deps-ear-jar" unless="no.deps"/>
     <target depends="init, deps-module-jar, deps-ear-jar" name="deps-jar" unless="no.deps"/>
-    <target depends="init,deps-jar" name="-pre-pre-compile">
+    <target depends="init" name="wscompile-init">
+        <taskdef classname="com.sun.xml.rpc.tools.ant.Wscompile" classpath="${wscompile.classpath}" name="wscompile"/>
+        <taskdef classname="org.netbeans.modules.websvc.jaxrpc.ant.WsClientUpToDate" classpath="${wsclientuptodate.classpath}" name="wsclientuptodate"/>
+        <mkdir dir="${build.web.dir}/WEB-INF/wsdl"/>
+        <mkdir dir="${webinf.dir}/wsdl"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${build.generated.sources.dir}/jax-rpc"/>
+        <mkdir dir="${build.generated.dir}/jax-rpc-binaries"/>
+        <wsclientuptodate property="wscompile.client.LyricsWikia.notrequired" sourcewsdl="${webinf.dir}/wsdl/LyricsWikia.wsdl" targetdir="${build.generated.sources.dir}/jax-rpc"/>
+    </target>
+    <target depends="wscompile-init" name="LyricsWikia-client-wscompile" unless="wscompile.client.LyricsWikia.notrequired">
+        <property location="${webinf.dir}/wsdl" name="config_target"/>
+        <copy encoding="UTF-8" file="${webinf.dir}/wsdl/LyricsWikia-config.xml" filtering="on" tofile="${build.generated.sources.dir}/jax-rpc/wsdl/LyricsWikia-config.xml">
+            <filterset>
+                <filter token="CONFIG_ABSOLUTE_PATH" value="${config_target}"/>
+            </filterset>
+        </copy>
+        <wscompile base="${build.generated.dir}/jax-rpc-binaries" classpath="${wscompile.classpath}:${javac.classpath}" client="true" config="${build.generated.sources.dir}/jax-rpc/wsdl/LyricsWikia-config.xml" debug="${wscompile.client.LyricsWikia.debug}" features="${wscompile.client.LyricsWikia.features}" fork="true" httpproxy="${wscompile.client.LyricsWikia.proxy}" import="false" keep="true" mapping="${build.generated.sources.dir}/jax-rpc/wsdl/LyricsWikia-mapping.xml" optimize="${wscompile.client.LyricsWikia.optimize}" sourceBase="${build.generated.sources.dir}/jax-rpc" verbose="${wscompile.client.LyricsWikia.verbose}" xPrintStackTrace="${wscompile.client.LyricsWikia.xPrintStackTrace}" xSerializable="${wscompile.client.LyricsWikia.xSerializable}"/>
+    </target>
+    <target depends="LyricsWikia-client-wscompile" name="web-service-client-generate">
+        <copy file="${build.generated.sources.dir}/jax-rpc/wsdl/LyricsWikia-mapping.xml" tofile="${build.web.dir}/WEB-INF/LyricsWikia-mapping.xml"/>
+    </target>
+    <target depends="init,deps-jar,web-service-client-generate,wsimport-client-generate" name="-pre-pre-compile">
         <mkdir dir="${build.classes.dir}"/>
     </target>
     <target name="-pre-compile">
@@ -997,10 +1020,13 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,-do-dist-with-manifest,-do-dist-without-manifest" name="do-dist"/>
     <target depends="init" if="dist.ear.dir" name="library-inclusion-in-manifest">
+        <copyfiles files="${libs.jaxrpc16.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
-    <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir"/>
+    <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
+        <copyfiles files="${libs.jaxrpc16.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
+    </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>
     </target>
@@ -1160,10 +1186,10 @@ exists or setup the property manually. For example like this:
         </condition>
         <nbjpdaconnect address="${jpda.address}" host="${jpda.host}" listeningcp="${listeningcp}" name="${name}" transport="${jpda.transport}">
             <classpath>
-                <path path="${debug.classpath}:${j2ee.platform.classpath}"/>
+                <path path="${debug.classpath}:${j2ee.platform.classpath}:${ws.debug.classpaths}"/>
             </classpath>
             <sourcepath>
-                <path path="${web.docbase.dir}"/>
+                <path path="${web.docbase.dir}:${ws.web.docbase.dirs}"/>
             </sourcepath>
         </nbjpdaconnect>
     </target>

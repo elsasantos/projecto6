@@ -34,6 +34,9 @@ and open the template in the editor.
                             <h:dataTable value="#{requestMusicMb.myMusicList}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" styleClass="dataTable"
                                          headerClass="dataTableTitle">
 
+                                <h:column></h:column>  
+                                <f:facet name="header">Lyric</f:facet>
+                                <h:commandButton value="#{webServiceController.checkLyric()}/>
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
                                         #{music.title}
